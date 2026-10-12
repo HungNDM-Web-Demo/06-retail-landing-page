@@ -14,7 +14,7 @@
 | Loại sản phẩm | Landing page + web quản lý đơn |
 | Ý tưởng gốc | 2.2 · Landing page bán 1 sản phẩm (`ZDOCS/02-KE-HOACH/DANH-SACH-Y-TUONG.md`) |
 | Người phụ trách | |
-| Trạng thái | Mới tạo từ khuôn mẫu |
+| Trạng thái | Có tài liệu nghiệp vụ (SRS, use case, kịch bản demo, kịch bản kiểm thử), chưa code |
 
 ## 2. Vấn đề của khách hàng
 
@@ -46,7 +46,10 @@
 | `Cms` | Landing page nhiều khối nội dung | `/` | P1 |
 | `Cms` | Đếm ngược, combo giá | `/` | P1 |
 | `Sales` | Form đặt hàng COD | `/` (khối cuối trang) | P1 |
+| `Sales` | Trang cảm ơn sau khi đặt hàng | `/cam-on` | P1 |
+| `Sales` | Tổng quan trong ngày | `/dashboard` | P1 |
 | `Sales` | Quản lý đơn, xác nhận | `/admin/orders` | P1 |
+| `Cms` | Combo giá, thời gian khuyến mãi | `/admin/combos` | P2 |
 | `Sales` | Theo dõi nguồn UTM | `/admin/reports` | P2 |
 | `Sales` | Báo cáo đơn theo nguồn, combo | `/admin/reports` | P2 |
 | `Cms` | Chỉnh nội dung landing | `/admin/content` | P3 |
