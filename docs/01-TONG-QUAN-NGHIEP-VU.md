@@ -13,8 +13,8 @@
 | Ngành / loại khách hàng | Shop bán một sản phẩm chủ lực, chạy quảng cáo (mỹ phẩm, thực phẩm, đồ gia dụng) |
 | Loại sản phẩm | Landing page + web quản lý đơn |
 | Ý tưởng gốc | 2.2 · Landing page bán 1 sản phẩm (`ZDOCS/02-KE-HOACH/DANH-SACH-Y-TUONG.md`) |
-| Người phụ trách | |
-| Trạng thái | Có tài liệu nghiệp vụ (SRS, use case, kịch bản demo, kịch bản kiểm thử), chưa code |
+| Người phụ trách | Mạnh Hùng (Pum) |
+| Trạng thái | Đã code BE + FE, chạy được cả hai chế độ (dữ liệu mẫu và BE thật trên Postgres) |
 
 ## 2. Vấn đề của khách hàng
 

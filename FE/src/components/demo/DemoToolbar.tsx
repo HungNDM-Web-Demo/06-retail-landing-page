@@ -7,6 +7,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Separator } from '@/components/ui/separator'
 import { appConfig } from '@/config/app.config'
 import { useDemoEnvironment } from '@/features/demo/hooks/use-demo'
+import { LandingDemoTools } from '@/features/landing/components/LandingDemoTools'
 import { ResetDataButton, ResetDataDialog } from './ResetDataButton'
 import { RoleSwitcher } from './RoleSwitcher'
 import { ThemePicker } from './ThemePicker'
@@ -73,6 +74,11 @@ function DemoToolbarPanel() {
 
           <Section title="Đổi vai trò nhanh">
             <RoleSwitcher onSwitched={() => setOpen(false)} />
+          </Section>
+          <Separator />
+          {/* Dự án Landing: giả lập đơn, mở landing theo nguồn hoặc như khách khác (docs/07 §4.2 bước 2) */}
+          <Section title="Landing">
+            <LandingDemoTools onDone={() => setOpen(false)} />
           </Section>
           <Separator />
           <Section title="Giao diện">

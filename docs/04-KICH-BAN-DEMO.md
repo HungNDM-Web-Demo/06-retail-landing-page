@@ -10,13 +10,13 @@
 - [ ] Đặt lại dữ liệu demo (thanh công cụ demo → Đặt lại dữ liệu) để có 60 ngày đơn và lượt truy cập tính tới hôm nay
 - [ ] Đổi tên shop, logo, màu theo thương hiệu khách (Cài đặt → Thương hiệu) nếu đã biết
 - [ ] Mở landing trên điện thoại thật hoặc DevTools 390×844, dùng link giả lập quảng cáo: `http://localhost:3106/?utm_source=fb&utm_medium=cpc&utm_campaign=serum_t10`
-- [ ] Mở thêm một cửa sổ ẩn danh để đặt đơn trùng ở bước 4
+- [ ] Mở thêm một cửa sổ ẩn danh để đặt đơn trùng ở bước 4 (bản online `https://pum-landing-page.vercel.app` không có BE: dùng tab mới `/?visitor=2` thay cho cửa sổ ẩn danh, hoặc thanh công cụ demo → Landing → "Mở landing như khách khác")
 - [ ] Ghi nhớ dữ liệu mẫu: combo Mua 1 (390.000 ₫, phí ship 30.000 ₫), Mua 2 tặng 1 (740.000 ₫, miễn phí ship), Mua 3 (990.000 ₫, miễn phí ship); đơn mẫu của "Nguyễn Văn Nam" đã 2 lần không nghe máy; khách "Lê Thị Hoa" có 2 đơn hoàn
 - [ ] Chuẩn bị số điện thoại demo chưa có trong dữ liệu mẫu, vd `0901000088`
 
 | Link | Ghi chú |
 | :--- | :--- |
-| FE | `http://localhost:3106` hoặc link online |
+| FE | `http://localhost:3106` hoặc bản online `https://pum-landing-page.vercel.app` (dữ liệu mẫu, không có BE) |
 | Swagger | `https://localhost:7106/swagger` (khi khách hỏi về tích hợp) |
 
 | Tài khoản | Vai trò | Dùng để cho xem |

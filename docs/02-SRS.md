@@ -58,7 +58,7 @@ Tài liệu mô tả đầy đủ yêu cầu của bản demo Landing Page Bán 
 
 ### 2.1. Bối cảnh sản phẩm
 
-Shop bán một sản phẩm chủ lực, chạy quảng cáo Facebook, TikTok, Google mỗi ngày, nhận 10–50 đơn COD mỗi ngày. Khách bấm quảng cáo trên điện thoại, đọc trang, để lại tên, số điện thoại, địa chỉ. Đội 2–5 telesale gọi xác nhận trong vòng 15 phút, chào lên combo lớn hơn, chốt đơn rồi gửi hàng qua đơn vị vận chuyển. Chủ shop cần biết mỗi nguồn quảng cáo ra bao nhiêu đơn thật, đã giao được bao nhiêu, telesale nào chốt tốt. Dữ liệu mẫu dùng sản phẩm "Serum Rau Má Phục Hồi 30 ml"; thực phẩm, đồ gia dụng dùng cùng mô hình.
+Shop bán một sản phẩm chủ lực, chạy quảng cáo Facebook, TikTok, Google mỗi ngày, nhận 10–50 đơn COD mỗi ngày. Khách bấm quảng cáo trên điện thoại, đọc trang, để lại tên, số điện thoại, địa chỉ. Đội 2–5 telesale gọi xác nhận trong vòng 15 phút, chào lên combo lớn hơn, chốt đơn rồi gửi hàng qua đơn vị vận chuyển. Chủ shop cần biết mỗi nguồn quảng cáo ra bao nhiêu đơn thật, đã giao được bao nhiêu, telesale nào chốt tốt. Dữ liệu mẫu dùng shop hư cấu "Diệp Lam" bán sản phẩm "Serum Rau Má Phục Hồi 30 ml"; thực phẩm, đồ gia dụng dùng cùng mô hình.
 
 ### 2.2. Tác nhân
 
@@ -104,7 +104,7 @@ flowchart TD
 - Telesale gọi bằng điện thoại của mình qua liên kết `tel:`; hệ thống không ghi âm, không kiểm tra cuộc gọi có diễn ra.
 - SMS gửi khách, pixel quảng cáo, đơn vị vận chuyển và mã vận đơn đều giả lập; mọi tin và sự kiện giả lập được ghi vào dòng thời gian của đơn hoặc nhật ký sự kiện.
 - Giờ làm việc của telesale 8:00–21:00; đơn đến ngoài giờ vẫn nhận và chia bình thường.
-- Đồng hồ đếm ngược gắn với thời điểm kết thúc thật của chương trình, không tự lặp lại.
+- Đồng hồ đếm ngược gắn với thời điểm kết thúc thật của chương trình trên máy chủ, mọi khách thấy cùng một giờ kết thúc. Riêng bản demo bật "tự gia hạn": từ ngày hôm sau ngày kết thúc, máy chủ tự dời thời điểm kết thúc theo chu kỳ 3 ngày để demo mở lúc nào cũng còn khuyến mãi; bản triển khai tắt mặc định.
 
 ---
 
@@ -122,7 +122,7 @@ flowchart TD
 
 | Mã | Yêu cầu | Ưu tiên | Vai trò | UC |
 | :--- | :--- | :---: | :--- | :--- |
-| FR-04 | Landing hiển thị các khối theo thứ tự: banner chính, vấn đề của khách, công dụng và thành phần, hình trước và sau, đánh giá khách hàng, chứng nhận, câu hỏi thường gặp, khối combo, form đặt hàng, chân trang có thông tin shop và chính sách đổi trả | P1 | Khách | UC-01 |
+| FR-04 | Landing hiển thị các khối theo thứ tự: banner chính, vấn đề của khách, công dụng và thành phần, hình trước và sau, đánh giá khách hàng, chứng nhận, cam kết (kiểm hàng, đổi trả, COD), câu hỏi thường gặp, khối combo, form đặt hàng, chân trang có thông tin shop và chính sách đổi trả | P1 | Khách | UC-01 |
 | FR-05 | Nút "Đặt hàng ngay" cố định ở cuối màn hình điện thoại; bấm vào thì trang cuộn tới khối combo | P1 | Khách | UC-01 |
 | FR-06 | Đồng hồ đếm ngược ở banner và trên form hiển thị thời gian còn lại của chương trình khuyến mãi; hết hạn thì ẩn | P1 | Khách | UC-01 |
 | FR-07 | Khối combo hiển thị từng combo: tên, nội dung (số chai, quà tặng), giá khuyến mãi, giá thường gạch ngang, giá mỗi chai, phí vận chuyển hoặc "Miễn phí vận chuyển", nhãn nổi bật; combo mặc định được chọn sẵn | P1 | Khách | UC-01 |
@@ -194,7 +194,7 @@ flowchart TD
 | BR-17 | Đơn vị vận chuyển chọn trong GHN, GHTK, Viettel Post, J&T Express (giả lập). Mã vận đơn giả lập = mã đơn vị (`GHN`, `GHTK`, `VTP`, `JT`) + 10 chữ số. Tiền thu hộ = tổng tiền đơn. Bàn giao nhiều đơn thì bỏ qua đơn không ở trạng thái Đã xác nhận và báo số đơn bị bỏ qua | FR-25 |
 | BR-18 | Hoàn hàng bắt buộc chọn lý do: Khách không nghe máy, Khách từ chối nhận, Sai địa chỉ, Khác | FR-26 |
 | BR-19 | Tỉ lệ xác nhận = số đơn đã từng xác nhận (Đã xác nhận, Đang giao, Đã giao, Hoàn hàng) / số đơn (không tính "Đơn trùng") × 100. Tỉ lệ hoàn = Hoàn hàng / (Đã giao + Hoàn hàng) × 100. Hai tỉ lệ làm tròn 1 chữ số thập phân. Doanh thu đã giao = Σ tiền hàng của đơn Đã giao, tính theo ngày giao, không gồm phí vận chuyển. Giá trị đơn đã xác nhận = Σ tổng tiền của đơn đã từng xác nhận, tính theo ngày xác nhận | FR-01, FR-29, FR-30, FR-31, FR-32 |
-| BR-20 | Đếm ngược tính theo giờ máy chủ, không theo đồng hồ máy khách. Còn từ 24 giờ trở lên thì hiển thị "N ngày hh:mm:ss", dưới 24 giờ hiển thị "hh:mm:ss". Thời điểm kết thúc phải sau thời điểm bắt đầu | FR-06, FR-16 |
+| BR-20 | Đếm ngược tính theo giờ máy chủ, không theo đồng hồ máy khách. Còn từ 24 giờ trở lên thì hiển thị "N ngày hh:mm:ss", dưới 24 giờ hiển thị "hh:mm:ss". Thời điểm kết thúc phải sau thời điểm bắt đầu. Chương trình bật tự gia hạn N ngày (bản demo) thì từ ngày hôm sau ngày kết thúc, thời điểm kết thúc dời thêm N ngày tới khi còn ở tương lai; trong ngày kết thúc không gia hạn | FR-06, FR-16 |
 | BR-21 | Thông báo đơn gần đây chỉ lấy đơn thật trong 48 giờ, chưa hủy; hiển thị tên gọi (từ cuối của họ tên), tỉnh/thành, combo, thời gian tương đối, vd "Hoa ở Hà Nội vừa đặt Mua 2 tặng 1 – 12 phút trước"; không hiển thị số điện thoại, địa chỉ | FR-13 |
 | BR-22 | Chi phí mỗi đơn xác nhận = chi phí quảng cáo / số đơn xác nhận, làm tròn tới 1.000 ₫. ROAS = doanh thu đã giao / chi phí quảng cáo, làm tròn 2 chữ số thập phân | FR-33 |
 
@@ -309,7 +309,7 @@ Landing page (`/`) và trang cảm ơn (`/cam-on`) công khai, không cần quy�
 | NFR-03 | Gửi form phản hồi dưới 1,5 giây; mất mạng thì giữ nguyên dữ liệu đã nhập, báo lỗi rõ, cho gửi lại mà không tạo đơn trùng (mã yêu cầu duy nhất) |
 | NFR-04 | Landing render phía máy chủ, có title, meta description, ảnh Open Graph để link chia sẻ qua Facebook, Zalo hiện đúng ảnh và tiêu đề |
 | NFR-05 | Màn đơn hàng của telesale: ghi kết quả một cuộc gọi tối đa 3 thao tác; danh sách tự làm mới mỗi 30 giây; đơn mới chia cho mình hiện thông báo kèm âm báo |
-| NFR-06 | Nội dung mẫu không đưa cam kết chữa bệnh, không dùng đếm ngược giả tự lặp lại; đánh giá mẫu ghi rõ là dữ liệu minh họa |
+| NFR-06 | Nội dung mẫu không đưa cam kết chữa bệnh, không dùng đếm ngược giả (mỗi lượt xem lại đếm từ đầu); thương hiệu shop, sản phẩm, đánh giá mẫu là hư cấu và ghi rõ là dữ liệu minh họa |
 | NFR-07 | Dữ liệu mẫu 60 ngày, khoảng 600 đơn và 400–700 lượt truy cập mỗi ngày; nguồn facebook khoảng 55%, tiktok 25%, google 10%, zalo và trực tiếp 10%; tỉ lệ xác nhận 70–80%, tỉ lệ hoàn 10–15%; cao điểm 11–13h và 20–22h |
 
 ---

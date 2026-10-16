@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Design token màu (KIEN-TRUC-HE-THONG §6.5). Đổi thương hiệu: sửa file này.
  * Không viết mã màu cứng trong className, mọi màu đi qua token để đổi một chỗ.
  *
@@ -60,6 +60,17 @@
   --sidebar-accent-foreground: #0f172a;
   --sidebar-border: #e2e8f0;
   --sidebar-ring: var(--brand, #2563eb);
+
+  /* Landing bán hàng (FE-Landing, docs/07 §4.3): nền thảo mộc dịu, giá khuyến mãi đỏ, sao vàng, ô gấp */
+  --landing-bg: #f4f8f6;
+  --landing-surface: #ffffff;
+  --landing-soft: color-mix(in oklab, var(--primary) 9%, #ffffff);
+  --landing-ink: #10302a;
+  --landing-price: #b91c1c;
+  --landing-star: #f59e0b;
+  --landing-urgent: #fff4e6;
+  --landing-urgent-foreground: #9a3412;
+  --landing-hero-shade: rgba(6, 32, 28, 0.62);
 }
 
 .dark {
@@ -109,4 +120,14 @@
   --sidebar-accent-foreground: #f1f5f9;
   --sidebar-border: #1e2a42;
   --sidebar-ring: var(--brand-dark, #5182ef);
+
+  --landing-bg: #0b1512;
+  --landing-surface: #12201c;
+  --landing-soft: color-mix(in oklab, var(--primary) 16%, #12201c);
+  --landing-ink: #e3f1ec;
+  --landing-price: #fca5a5;
+  --landing-star: #fbbf24;
+  --landing-urgent: #2b1a0d;
+  --landing-urgent-foreground: #fdba74;
+  --landing-hero-shade: rgba(0, 0, 0, 0.66);
 }

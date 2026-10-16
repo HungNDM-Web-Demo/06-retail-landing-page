@@ -8,6 +8,7 @@ import { BrandLogo } from '@/components/shared/BrandLogo'
 import { ThemeToggle } from '@/components/shared/ThemeToggle'
 import { appConfig } from '@/config/app.config'
 import { homePathForUser } from '@/config/routes'
+import { LandingDemoCard } from '@/features/landing/components/LandingDemoCard'
 import { useBrand } from '@/features/settings/hooks/use-settings'
 import { formatPhone } from '@/lib/format'
 import { LoginForm } from '../components/LoginForm'
@@ -92,6 +93,8 @@ export function LoginPage() {
 
             <LoginForm onSuccess={handleSuccess} />
             <QuickLogin onSuccess={handleSuccess} />
+            {/* Dự án Landing: thẻ mở landing và link UTM mẫu (docs/07 §4.2 bước 1) */}
+            <LandingDemoCard />
           </div>
         </main>
 

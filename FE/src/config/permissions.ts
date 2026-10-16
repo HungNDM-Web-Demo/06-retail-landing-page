@@ -26,8 +26,34 @@ export const permissions = {
   auditLogs: {
     view: 'audit-logs.view',
   },
-  // Quyền nghiệp vụ của dự án thêm bên dưới, vd:
-  // menuItems: { view: 'menu-items.view', create: 'menu-items.create', ... },
+  // Quyền nghiệp vụ (docs/07-DANH-SACH-API.md §1, project.json)
+  orders: {
+    view: 'orders.view',
+    viewAll: 'orders.view-all',
+    call: 'orders.call',
+    assign: 'orders.assign',
+    cancel: 'orders.cancel',
+    ship: 'orders.ship',
+    export: 'orders.export',
+  },
+  combos: {
+    view: 'combos.view',
+    create: 'combos.create',
+    update: 'combos.update',
+    delete: 'combos.delete',
+  },
+  landingContents: {
+    view: 'landing-contents.view',
+    update: 'landing-contents.update',
+  },
+  adCosts: {
+    view: 'ad-costs.view',
+    create: 'ad-costs.create',
+    update: 'ad-costs.update',
+  },
+  reports: {
+    view: 'reports.view',
+  },
 } as const
 
 /** Mã vai trò hệ thống (BR-SYS-06). */

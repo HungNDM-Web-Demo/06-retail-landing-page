@@ -21,12 +21,13 @@ Dữ liệu mẫu dùng trong test:
 - Combo `C01` "Mua 1": 1 chai; giá khuyến mãi 390.000 ₫, giá thường 450.000 ₫; không miễn phí vận chuyển.
 - Combo `C02` "Mua 2 tặng 1": 2 chai, tặng 1 sữa rửa mặt Rau Má 100 ml; giá khuyến mãi 740.000 ₫, giá thường 900.000 ₫; miễn phí vận chuyển; combo mặc định, nhãn "Bán chạy nhất".
 - Combo `C03` "Mua 3": 3 chai, tặng 1 sữa rửa mặt; giá khuyến mãi 990.000 ₫, giá thường 1.350.000 ₫; miễn phí vận chuyển; nhãn "Tiết kiệm nhất".
-- Chương trình khuyến mãi: bắt đầu 7 ngày trước, kết thúc 23:59:59 ngày kia (tính từ lúc đặt lại dữ liệu).
+- Chương trình khuyến mãi: bắt đầu 7 ngày trước, kết thúc 23:59:59 ngày kia (tính từ lúc đặt lại dữ liệu), tự gia hạn 3 ngày kể từ ngày hôm sau ngày kết thúc (BR-20).
 - Phí vận chuyển 30.000 ₫ mỗi đơn; miễn phí khi combo miễn phí vận chuyển hoặc tiền hàng ≥ 500.000 ₫.
 - Telesale: `nhanvien` đang bật "Nhận đơn"; "Phạm Thu Hằng", "Đỗ Minh Tuấn" đang tắt.
 - Khách "Lê Thị Hoa" `0987654321`: 2 đơn Hoàn hàng, 1 đơn Chờ gọi lại đặt cách đây 30 giờ, phụ trách `nhanvien`.
 - Đơn mẫu của "Nguyễn Văn Nam" `0912000111`: Chờ gọi lại, đã 2 lần "Không nghe máy", phụ trách `nhanvien`.
 - Số điện thoại test `0901000001` đến `0901000019` chưa có trong dữ liệu mẫu.
+- Chế độ `mock` (bản online không có BE): các bước ghi "trình duyệt A, B" hoặc "cửa sổ ẩn danh mới" chạy bằng tab mới cùng trình duyệt với `?visitor=2`, `?visitor=3`… (mỗi số là một trình duyệt giả lập, `07-DANH-SACH-API.md` §4.2), vì cửa sổ ẩn danh không thấy dữ liệu mẫu của trình duyệt đang đăng nhập.
 
 ---
 
@@ -104,4 +105,5 @@ Dữ liệu mẫu dùng trong test:
 
 | Ngày | Người test | Chế độ | Số TC đạt / tổng | Lỗi ghi nhận |
 | :--- | :--- | :--- | :---: | :--- |
-| | | | | |
+| 15/10/2026 | Claude (kiểm thử tự động trên trình duyệt) | `api` (BE thật trên Postgres, đặt lại dữ liệu trước khi chạy) | 34 / 36 | Đạt TC-01, TC-03, TC-05 → TC-36; landing chạy ở 390×844, quản trị 1366×768; đăng nhập bằng form `admin`, `quanly`, `nhanvien` vào `/dashboard`; thẻ "Xem landing page" ở trang đăng nhập; đơn mới hiện sau lần làm mới 30 giây; 429 đặt quá nhanh, gửi lại cùng `clientRequestId`, `GiaDaThayDoi`, `ComboDaThayDoi`, tự gia hạn khuyến mãi; số 59 ngày khớp `06` §5.7. Chưa kiểm ở `api`: TC-02 (khung trình duyệt kiểm thử không vẽ khung hình nên không bắt được sự kiện cuộn), TC-04 (không đổi được đồng hồ máy). Lỗi đã sửa: (1) BE `GET /api/public/landing` trả `max-age=60` nên sau 409 `GiaDaThayDoi` và sau khi quản lý sửa khuyến mãi, combo khách vẫn thấy giá cũ → `no-cache`; (2) BE khóa lỗi `changes.*` khi xác nhận kèm sửa đơn → không tiền tố như `PUT` (thêm test); (3) FE form sửa khối nội dung không lưu được vì BE trả `null` cho trường trống; (4) FE form đặt hàng nuốt lỗi có khóa lạ → chỉ gắn vào ô có trên form, còn lại hiện thông báo; (5) FE `callerId` cho phép vắng; mock `openOrders` chỉ đếm Mới + Chờ gọi lại; mock "chi phí mỗi đơn xác nhận" trả null khi không có chi phí; mock lỗi nhiều trường dùng câu của BE; ẩn thao tác đơn trùng trên đơn đã hủy |
+| 15/10/2026 | Claude (kiểm thử tự động trên trình duyệt) | `mock` (kiểm lại phần đã sửa, đặt lại dữ liệu demo) | 3 / 3 | Đạt TC-05, TC-09, TC-10; thêm: báo cáo `from = hôm nay − 59`, `to = hôm nay − 1` ra 589 đơn, tỉ lệ xác nhận 75,2%, facebook 319, `nhanvien` 290 được chia, 77,9% (khớp BE); "Trực tiếp" hiện "—" ở chi phí mỗi đơn xác nhận như BE; lưu khối nội dung được. Không có lỗi mới |

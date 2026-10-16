@@ -1,9 +1,198 @@
 {
-  "$comment": "Phần riêng của dự án, ghép thêm vào system.json khi seed (FE mock và BE SystemSeeder). permissions: quyền nghiệp vụ; roles: vai trò riêng (vd CASHIER); roleGrants: quyền cấp thêm cho vai trò có sẵn; users: tài khoản demo thêm, trùng username thì ghi đè các trường khai báo; roles trùng code thì ghi đè tên, mô tả; settings: ghi đè giá trị cài đặt nền theo khóa; homeAfterLogin: trang mở sau khi đăng nhập (chỉ FE).",
-  "permissions": [],
-  "roles": [],
-  "roleGrants": {},
-  "users": [],
-  "settings": [],
+  "$comment": "Phần riêng của dự án, ghép thêm vào system.json khi seed (FE mock và BE SystemSeeder). permissions: quyền nghiệp vụ (docs/07-DANH-SACH-API.md §1, khớp 02-SRS §7); roles: đổi tên STAFF thành Telesale, đổi mô tả MANAGER; roleGrants: quyền cấp thêm cho vai trò có sẵn; users: admin, quanly, nhanvien ghi đè mô tả thẻ Đăng nhập nhanh (nhanvien đổi họ tên), thêm nhanvien2, nhanvien3 (telesale trong dữ liệu mẫu, không có thẻ đăng nhập nhanh); settings: Brand.*, Store.* (thông tin shop hư cấu trên landing, chân trang; docs/06 §3); homeAfterLogin: trang mặc định sau đăng nhập.",
+  "permissions": [
+    {
+      "code": "orders.view",
+      "groupName": "Đơn hàng",
+      "name": "Xem đơn chưa chia và đơn mình phụ trách",
+      "sortOrder": 200
+    },
+    { "code": "orders.view-all", "groupName": "Đơn hàng", "name": "Xem mọi đơn", "sortOrder": 201 },
+    {
+      "code": "orders.call",
+      "groupName": "Đơn hàng",
+      "name": "Ghi kết quả gọi, xác nhận, sửa đơn khi xác nhận, xử lý đơn trùng",
+      "sortOrder": 202
+    },
+    {
+      "code": "orders.assign",
+      "groupName": "Đơn hàng",
+      "name": "Chia lại đơn cho telesale khác",
+      "sortOrder": 203
+    },
+    {
+      "code": "orders.cancel",
+      "groupName": "Đơn hàng",
+      "name": "Hủy đơn chưa bàn giao",
+      "sortOrder": 204
+    },
+    {
+      "code": "orders.ship",
+      "groupName": "Đơn hàng",
+      "name": "Bàn giao vận chuyển, cập nhật kết quả giao",
+      "sortOrder": 205
+    },
+    {
+      "code": "orders.export",
+      "groupName": "Đơn hàng",
+      "name": "Xuất Excel danh sách đơn",
+      "sortOrder": 206
+    },
+    {
+      "code": "combos.view",
+      "groupName": "Combo và khuyến mãi",
+      "name": "Xem combo và thời gian khuyến mãi",
+      "sortOrder": 210
+    },
+    {
+      "code": "combos.create",
+      "groupName": "Combo và khuyến mãi",
+      "name": "Thêm combo",
+      "sortOrder": 211
+    },
+    {
+      "code": "combos.update",
+      "groupName": "Combo và khuyến mãi",
+      "name": "Sửa, ẩn, sắp xếp combo, đổi thời gian khuyến mãi",
+      "sortOrder": 212
+    },
+    {
+      "code": "combos.delete",
+      "groupName": "Combo và khuyến mãi",
+      "name": "Xóa combo chưa có đơn",
+      "sortOrder": 213
+    },
+    {
+      "code": "landing-contents.view",
+      "groupName": "Nội dung landing",
+      "name": "Xem khối nội dung, đánh giá, sản phẩm",
+      "sortOrder": 220
+    },
+    {
+      "code": "landing-contents.update",
+      "groupName": "Nội dung landing",
+      "name": "Sửa khối nội dung, đánh giá, sản phẩm",
+      "sortOrder": 221
+    },
+    {
+      "code": "ad-costs.view",
+      "groupName": "Chi phí quảng cáo",
+      "name": "Xem chi phí quảng cáo",
+      "sortOrder": 230
+    },
+    {
+      "code": "ad-costs.create",
+      "groupName": "Chi phí quảng cáo",
+      "name": "Nhập chi phí quảng cáo",
+      "sortOrder": 231
+    },
+    {
+      "code": "ad-costs.update",
+      "groupName": "Chi phí quảng cáo",
+      "name": "Sửa, xóa chi phí quảng cáo",
+      "sortOrder": 232
+    },
+    {
+      "code": "reports.view",
+      "groupName": "Báo cáo",
+      "name": "Xem báo cáo và số liệu toàn shop ở Tổng quan",
+      "sortOrder": 240
+    }
+  ],
+  "roles": [
+    {
+      "code": "MANAGER",
+      "name": "Quản lý",
+      "description": "Combo và khuyến mãi, nội dung landing, chia đơn, xuất Excel, chi phí quảng cáo, báo cáo; làm được mọi việc của telesale"
+    },
+    {
+      "code": "STAFF",
+      "name": "Telesale",
+      "description": "Gọi xác nhận đơn, upsell, xử lý đơn trùng, hủy đơn, bàn giao vận chuyển, cập nhật kết quả giao"
+    }
+  ],
+  "roleGrants": {
+    "MANAGER": [
+      "orders.view",
+      "orders.view-all",
+      "orders.call",
+      "orders.assign",
+      "orders.cancel",
+      "orders.ship",
+      "orders.export",
+      "combos.view",
+      "combos.create",
+      "combos.update",
+      "combos.delete",
+      "landing-contents.view",
+      "landing-contents.update",
+      "ad-costs.view",
+      "ad-costs.create",
+      "ad-costs.update",
+      "reports.view"
+    ],
+    "STAFF": ["orders.view", "orders.call", "orders.cancel", "orders.ship", "combos.view"]
+  },
+  "users": [
+    {
+      "username": "admin",
+      "description": "Phân quyền, tài khoản, thông tin shop, logo và màu trên landing"
+    },
+    {
+      "username": "quanly",
+      "description": "Tổng quan, combo và khuyến mãi, nội dung landing, chia đơn, xuất Excel, báo cáo theo nguồn"
+    },
+    {
+      "username": "nhanvien",
+      "fullName": "Vũ Ngọc Ánh",
+      "description": "Telesale: gọi xác nhận, upsell, xử lý đơn trùng, bàn giao vận chuyển, cập nhật giao hàng"
+    },
+    {
+      "username": "nhanvien2",
+      "fullName": "Phạm Thu Hằng",
+      "email": "nhanvien2@example.com",
+      "phone": "0123456784",
+      "roles": ["STAFF"],
+      "isDemoAccount": true,
+      "quickLogin": false,
+      "sortOrder": 4,
+      "description": "Telesale ca sáng trong dữ liệu mẫu, đang tắt nhận đơn"
+    },
+    {
+      "username": "nhanvien3",
+      "fullName": "Đỗ Minh Tuấn",
+      "email": "nhanvien3@example.com",
+      "phone": "0123456785",
+      "roles": ["STAFF"],
+      "isDemoAccount": true,
+      "quickLogin": false,
+      "sortOrder": 5,
+      "description": "Telesale bán thời gian trong dữ liệu mẫu, đang tắt nhận đơn"
+    }
+  ],
+  "settings": [
+    { "key": "Brand.AppName", "value": "Landing Page Bán hàng", "groupName": "Thương hiệu" },
+    { "key": "Brand.LogoUrl", "value": "/logo/logo-mark.svg", "groupName": "Thương hiệu" },
+    { "key": "Brand.PrimaryColor", "value": "#0F766E", "groupName": "Thương hiệu" },
+    { "key": "Store.Name", "value": "Diệp Lam", "groupName": "Shop" },
+    {
+      "key": "Store.Tagline",
+      "value": "Mỹ phẩm thảo mộc Việt, dịu nhẹ cho làn da nhạy cảm",
+      "groupName": "Shop"
+    },
+    { "key": "Store.Hotline", "value": "0283 8 456 789", "groupName": "Shop" },
+    { "key": "Store.Email", "value": "cskh@dieplam.example", "groupName": "Shop" },
+    {
+      "key": "Store.Address",
+      "value": "Tầng 3, 25 Nguyễn Trãi, Phường Bến Thành, TP. Hồ Chí Minh",
+      "groupName": "Shop"
+    },
+    { "key": "Store.WorkingHours", "value": "8:00–21:00 hằng ngày", "groupName": "Shop" },
+    {
+      "key": "Store.BusinessInfo",
+      "value": "Hộ kinh doanh Diệp Lam · Giấy chứng nhận đăng ký kinh doanh số minh họa",
+      "groupName": "Shop"
+    }
+  ],
   "homeAfterLogin": "/dashboard"
 }
